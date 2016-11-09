@@ -19,7 +19,7 @@ public class UserGroupFactory {
      * @param userGroup object with values to convert
      * @return object DTO
      */
-    public UserGroupDTO convertUserGroupToUserGroupDTO(UserGroup userGroup){
+    public UserGroupDTO convertToDTO(UserGroup userGroup){
         if(userGroup == null)
             return null;
         UserGroupDTO userGroupDTO = new UserGroupDTO();
@@ -28,13 +28,18 @@ public class UserGroupFactory {
         return userGroupDTO;
     }
     
-    public List<UserGroupDTO> convertListUserGroupToListUserGroupDTO(List<UserGroup> userGroups){
+    /**
+     * Convering list of userGroup object to list of usertGroupDTO object
+     * @param userGroups objects with values to convert
+     * @return list of object DTO
+     */
+    public List<UserGroupDTO> convertToDTO(List<UserGroup> userGroups){
         if(userGroups == null)
             return null;
         List<UserGroupDTO> userGroupDTOs = new ArrayList<>();
         if(CollectionUtils.isNotEmpty(userGroups)){
             userGroups.stream().forEach((userGroup) -> {
-                userGroupDTOs.add(convertUserGroupToUserGroupDTO(userGroup));
+                userGroupDTOs.add(UserGroupFactory.this.convertToDTO(userGroup));
             });
         }
         return userGroupDTOs;

@@ -3,7 +3,7 @@ package pl.devpragmatic.securitymodule.context;
 import java.util.List;
 
 /**
- *
+ * Data Transfer object for user context
  * @author devpragmatic
  */
 public class UserContextDTO {

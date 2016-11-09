@@ -33,7 +33,7 @@ public class SecureServiceImpl implements SecureService{
         contextDTO.setUserName(username);
         User user = userRepository.findOneByUsername(username);
         if(user != null){
-            contextDTO.setGroups(userGroupFactory.convertListUserGroupToListUserGroupDTO(userGroupRepository.findByUser(user.getUserId())));
+            contextDTO.setGroups(userGroupFactory.convertToDTO(userGroupRepository.findByUser(user.getUserId())));
         }
         return contextDTO;
     }

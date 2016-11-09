@@ -60,7 +60,7 @@ public class SecureServiceImplTest {
         List<UserGroup> userGroups = mock(List.class);
         when(userGroupRepository.findByUser(userId)).thenReturn(userGroups);
         List<UserGroupDTO> userGroupDTOs = mock(List.class);
-        when(userGroupFactory.convertListUserGroupToListUserGroupDTO(userGroups)).thenReturn(userGroupDTOs);
+        when(userGroupFactory.convertToDTO(userGroups)).thenReturn(userGroupDTOs);
         UserContextDTO result = secureService.getUserContext();
         Assert.assertEquals(userGroupDTOs, result.getGroups());
     }
