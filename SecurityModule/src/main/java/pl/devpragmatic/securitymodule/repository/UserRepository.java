@@ -18,5 +18,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
      * @return found user
      */
     public User findOneByUsername(String username);
-    
 }

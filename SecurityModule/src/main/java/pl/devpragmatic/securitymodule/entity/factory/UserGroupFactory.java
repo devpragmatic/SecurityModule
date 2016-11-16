@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;
-import pl.devpragmatic.securitymodule.context.UserGroupDTO;
+import pl.devpragmatic.securitymodule.dto.UserGroupDTO;
 import pl.devpragmatic.securitymodule.entity.UserGroup;
 
 /**

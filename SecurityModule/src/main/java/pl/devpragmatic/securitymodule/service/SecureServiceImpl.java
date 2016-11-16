@@ -5,7 +5,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import pl.devpragmatic.securitymodule.context.UserContextDTO;
+import pl.devpragmatic.securitymodule.dto.UserContextDTO;
 import pl.devpragmatic.securitymodule.entity.User;
 import pl.devpragmatic.securitymodule.entity.factory.UserGroupFactory;
 import pl.devpragmatic.securitymodule.repository.UserGroupRepository;
@@ -33,7 +33,7 @@ public class SecureServiceImpl implements SecureService{
         contextDTO.setUserName(username);
         User user = userRepository.findOneByUsername(username);
         if(user != null){
-            contextDTO.setGroups(userGroupFactory.convertToDTO(userGroupRepository.findByUser(user.getUserId())));
+            contextDTO.setGroups(userGroupFactory.convertToDTO(userGroupRepository.findByUser(user.getId())));
         }
         return contextDTO;
     }

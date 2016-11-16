@@ -19,7 +19,7 @@ public interface UserGroupRepository extends CrudRepository<UserGroup, Long> {
      * @param userId id of user
      * @return user groups
      */
-    @Query("select ug from UserGroup ug join ug.users u where u.userId = :userId")
+    @Query("select ug from UserGroup ug join ug.users u where u.id = :userId")
     public List<UserGroup> findByUser(@Param("userId") Long userId);
     
 }

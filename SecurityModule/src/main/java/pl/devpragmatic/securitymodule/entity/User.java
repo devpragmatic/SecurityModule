@@ -22,7 +22,7 @@ public class User {
     @Id
     @GeneratedValue
     @Column(name="user_id")
-    private Long userId;
+    private Long id;
     
     @Column(unique = true, nullable = false)
     private String username;
@@ -38,12 +38,12 @@ public class User {
 			inverseJoinColumns = { @JoinColumn(name = "role_id")})
     private List<Role> roles;
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {

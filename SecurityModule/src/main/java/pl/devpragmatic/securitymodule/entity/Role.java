@@ -16,17 +16,18 @@ public class Role {
     
     @Id
     @GeneratedValue
-    private Long role_id;
+    @Column(name="role_id")
+    private Long id;
     
     @Column(unique = true)
     private String name;
     
-    public Long getRole_id() {
-        return role_id;
+    public Long getId() {
+        return id;
     }
 
-    public void setRole_id(Long role_id) {
-        this.role_id = role_id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

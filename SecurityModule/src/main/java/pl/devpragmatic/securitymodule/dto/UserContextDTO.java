@@ -1,4 +1,4 @@
-package pl.devpragmatic.securitymodule.context;
+package pl.devpragmatic.securitymodule.dto;
 
 import java.util.List;
 

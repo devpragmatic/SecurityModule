@@ -15,8 +15,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
-import pl.devpragmatic.securitymodule.context.UserContextDTO;
-import pl.devpragmatic.securitymodule.context.UserGroupDTO;
+import pl.devpragmatic.securitymodule.dto.UserContextDTO;
+import pl.devpragmatic.securitymodule.dto.UserGroupDTO;
 import pl.devpragmatic.securitymodule.entity.User;
 import pl.devpragmatic.securitymodule.entity.UserGroup;
 import pl.devpragmatic.securitymodule.entity.factory.UserGroupFactory;
@@ -55,7 +55,7 @@ public class SecureServiceImplTest {
     public void whenUseGetUserContextThenSetUserGroupsForResult(){
         Long userId = RandomUtils.nextLong();
         User user = new User();
-        user.setUserId(userId);
+        user.setId(userId);
         when(userRepository.findOneByUsername(username)).thenReturn(user);
         List<UserGroup> userGroups = mock(List.class);
         when(userGroupRepository.findByUser(userId)).thenReturn(userGroups);

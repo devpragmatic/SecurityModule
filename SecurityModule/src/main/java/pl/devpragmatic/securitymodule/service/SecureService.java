@@ -1,7 +1,7 @@
 package pl.devpragmatic.securitymodule.service;
 
 import org.springframework.stereotype.Service;
-import pl.devpragmatic.securitymodule.context.UserContextDTO;
+import pl.devpragmatic.securitymodule.dto.UserContextDTO;
 
 /**
  * Secure service
