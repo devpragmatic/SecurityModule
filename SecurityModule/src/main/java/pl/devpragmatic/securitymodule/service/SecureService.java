@@ -13,4 +13,6 @@ public interface SecureService {
     UserContextDTO getUserContext();
     
     String getUserName();
+    
+    void checkPermissionToGroup(Long groupId);
 }

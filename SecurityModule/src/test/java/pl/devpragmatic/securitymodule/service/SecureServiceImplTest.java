@@ -6,7 +6,9 @@ import org.apache.commons.lang3.RandomUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -28,6 +30,9 @@ import pl.devpragmatic.securitymodule.repository.UserRepository;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class SecureServiceImplTest {
+    
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
     
     @InjectMocks
     private final SecureService secureService = spy(new SecureServiceImpl());
@@ -52,11 +57,8 @@ public class SecureServiceImplTest {
     }
 
     @Test
-    public void whenUseGetUserContextThenSetUserGroupsForResult(){
-        Long userId = RandomUtils.nextLong();
-        User user = new User();
-        user.setId(userId);
-        when(userRepository.findOneByUsername(username)).thenReturn(user);
+    public void useGetUserContext_setUserGroupsForResult(){
+        Long userId = createReturnedUserWithId();
         List<UserGroup> userGroups = mock(List.class);
         when(userGroupRepository.findByUser(userId)).thenReturn(userGroups);
         List<UserGroupDTO> userGroupDTOs = mock(List.class);
@@ -66,9 +68,34 @@ public class SecureServiceImplTest {
     }
     
     @Test
-    public void whenUseGetUserContextThenSetUserNameForResult(){
+    public void useGetUserContext_setUserNameForResult(){
         UserContextDTO result = secureService.getUserContext();
         Assert.assertEquals(username, result.getUserName());   
     }
     
+    @Test
+    public void correctPermission_checkPermissionToGroup_doNothing(){
+        Long userId = createReturnedUserWithId();
+        Long groupId = RandomUtils.nextLong();
+        when(userGroupRepository.findOneByUserAndId(userId, groupId)).thenReturn(new UserGroup());
+        secureService.checkPermissionToGroup(groupId);
+    }
+    
+        
+    @Test
+    public void incorrectPermission_checkPermissionToGroup_throwException(){
+        expectedException.expect(SecurityException.class);
+        Long userId = createReturnedUserWithId();
+        Long groupId = RandomUtils.nextLong();
+        when(userGroupRepository.findOneByUserAndId(userId, groupId)).thenReturn(null);
+        secureService.checkPermissionToGroup(groupId);
+    }
+    
+    private Long createReturnedUserWithId(){
+        Long userId = RandomUtils.nextLong();
+        User user = new User();
+        user.setId(userId);
+        when(userRepository.findOneByUsername(username)).thenReturn(user);
+        return userId;
+    }
 }

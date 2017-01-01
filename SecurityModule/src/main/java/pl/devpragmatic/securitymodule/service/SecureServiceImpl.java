@@ -59,6 +59,19 @@ public class SecureServiceImpl implements SecureService{
         }
         return "";
     }
-    
-    
+
+    @Override
+    public void checkPermissionToGroup(Long groupId) {
+        if(userGroupRepository.findOneByUserAndId(getUserId(), groupId) == null){
+            throw new SecurityException();
+        }
+    }
+
+    private Long getUserId() {
+        User user = userRepository.findOneByUsername(getUserName());
+        if(user == null){
+            throw new SecurityException();
+        }
+        return user.getId();
+    }
 }
