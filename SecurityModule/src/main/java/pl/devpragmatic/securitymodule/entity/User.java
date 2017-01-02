@@ -10,32 +10,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import pl.devpragmatic.generalcore.entity.BaseEntity;
 
 /**
  * Appliacation users
+ *
  * @author devpragmatic
  */
 @Entity
 @Table(name = "users")
-public class User {
-    
+public class User implements BaseEntity {
+
     @Id
     @GeneratedValue
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private Long id;
-    
+
     @Column(unique = true, nullable = false)
     private String username;
-    
+
     @Column(nullable = false)
     private String password;
-    
+
     private boolean enabled = false;
-    
+
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "user_roles", joinColumns = {
-			@JoinColumn(name="user_id")},
-			inverseJoinColumns = { @JoinColumn(name = "role_id")})
+        @JoinColumn(name = "user_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "role_id")})
     private List<Role> roles;
 
     public Long getId() {
